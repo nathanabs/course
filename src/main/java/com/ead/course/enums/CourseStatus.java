@@ -1,6 +1,6 @@
 package com.ead.course.enums;
 
-public enum CouseStatus {
+public enum CourseStatus {
     IN_PROGRESS,
     CONCLUDED
 }
