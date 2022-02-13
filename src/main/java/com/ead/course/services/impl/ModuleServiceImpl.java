@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -25,4 +28,20 @@ public class ModuleServiceImpl implements ModuleService {
         }
         moduleRepository.delete(module);
     }
+
+    @Override
+    public ModuleModel save(ModuleModel moduleModel) {
+        return moduleRepository.save(moduleModel);
+    }
+
+    @Override
+    public Optional<ModuleModel> findByModuleIntoCourse(UUID courseId, UUID moduleId) {
+        return moduleRepository.findByModuleIdAndCourse_CourseId(moduleId, courseId);
+    }
+
+    @Override
+    public List<ModuleModel> findAllByCourseId(UUID courseId) {
+        return moduleRepository.findAllModulesIntoCourse(courseId);
+    }
+
 }
