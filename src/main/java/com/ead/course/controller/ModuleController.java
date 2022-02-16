@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/modules")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class ModuleController {
@@ -42,7 +41,7 @@ public class ModuleController {
     }
 
     @DeleteMapping("/courses/{courseId}/modules{moduleId}")
-    public ResponseEntity<Object> deleteCourse(@PathVariable(value = "courseId") UUID courseId,
+    public ResponseEntity<Object> deleteModule(@PathVariable(value = "courseId") UUID courseId,
                                                @PathVariable(value = "moduleId") UUID moduleId){
 
         var moduleModel = moduleService.findByModuleIntoCourse(courseId, moduleId);
@@ -77,7 +76,7 @@ public class ModuleController {
         return ResponseEntity.ok(courses);
     }
 
-    @GetMapping("/courses/{courseId}/modules{moduleId}")
+    @GetMapping("/courses/{courseId}/modules/{moduleId}")
     public ResponseEntity<Object> getModuloById(@PathVariable(value = "courseId") UUID courseId,
                                                 @PathVariable(value = "moduleId") UUID moduleId){
         var moduleModel = moduleService.findByModuleIntoCourse(courseId, moduleId);
