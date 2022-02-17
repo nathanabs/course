@@ -85,7 +85,6 @@ public class LessonController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lesson not found for this Module.");
         }
 
-
         return ResponseEntity.ok(lessonModel.get());
     }
 }

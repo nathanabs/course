@@ -5,6 +5,10 @@ import com.ead.course.model.CourseModel;
 import com.ead.course.services.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.List;
 import java.util.UUID;
+
+import static org.springframework.data.domain.Sort.Direction.ASC;
 
 @RestController
 @RequestMapping("/courses")
@@ -62,8 +67,9 @@ public class CourseController{
     }
 
     @GetMapping
-    public ResponseEntity<List<CourseModel>> getAllCourses(){
-        var courses = service.findAll();
+    public ResponseEntity<Page<CourseModel>> getAllCourses(Specification<CourseModel> spec,
+                                                           @PageableDefault(page = 0, size = 10, sort = "name", direction = ASC) Pageable pageable){
+        var courses = service.findAll(spec, pageable);
         return ResponseEntity.ok(courses);
     }
 
