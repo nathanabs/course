@@ -65,7 +65,7 @@ public class CouseController {
         course.setCourseLevel(courseDto.getCourseLevel());
         course.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(courseService.save(course));
+        return ResponseEntity.status(HttpStatus.OK).body(courseService.save(course));
     }
 
     @GetMapping
