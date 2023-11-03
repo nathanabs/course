@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequiredArgsConstructor
 public class ModuleController {
@@ -45,7 +44,7 @@ public class ModuleController {
     }
 
     @DeleteMapping("/courses/{courseId}/modules/{moduleId}")
-    public ResponseEntity<Object> saveCourse(@PathVariable(value = "courseId") UUID courseId,
+    public ResponseEntity<Object> deleteModule(@PathVariable(value = "courseId") UUID courseId,
                                              @PathVariable(value = "moduleId") UUID moduleId){
 
         var moduleOptional = moduleService.findModuleIntoCourse(courseId, moduleId);
@@ -60,7 +59,7 @@ public class ModuleController {
     }
 
     @PutMapping("/courses/{courseId}/modules/{moduleId}")
-    public ResponseEntity<Object> updateCourse(@PathVariable(value = "courseId") UUID courseId,
+    public ResponseEntity<Object> updateModule(@PathVariable(value = "courseId") UUID courseId,
                                                @PathVariable(value = "moduleId") UUID moduleId,
                                                @RequestBody @Valid ModuleDto moduleDto){
         var moduleOptional = moduleService.findModuleIntoCourse(courseId, moduleId);
