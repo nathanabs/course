@@ -6,8 +6,11 @@ import com.ead.course.repository.CourseRepository;
 import com.ead.course.repository.LessonRepository;
 import com.ead.course.repository.ModuleRepository;
 import com.ead.course.service.CourseService;
+import com.ead.course.specifications.SpecificationTemplate;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -51,7 +54,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<CourseModel> findAllCouses() {
-        return courseRepository.findAll();
+    public Page<CourseModel> findAllCouses(Pageable pageable, SpecificationTemplate.CourseSpec spec) {
+        return courseRepository.findAll(spec, pageable);
     }
 }

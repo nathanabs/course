@@ -3,23 +3,27 @@ package com.ead.course.controller;
 import com.ead.course.dto.CourseDto;
 import com.ead.course.model.CourseModel;
 import com.ead.course.service.CourseService;
+import com.ead.course.specifications.SpecificationTemplate;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.List;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/courses")
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequiredArgsConstructor
-public class CouseController {
+public class CourseController {
 
     private final CourseService courseService;
 
@@ -69,8 +73,10 @@ public class CouseController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CourseModel>> getAllCourses(){
-        return ResponseEntity.ok(courseService.findAllCouses());
+    public ResponseEntity<Page<CourseModel>> getAllCourses(
+            SpecificationTemplate.CourseSpec spec,
+            @PageableDefault(page = 0, size = 10, sort = "courseId", direction = Sort.Direction.ASC) Pageable pageable){
+        return ResponseEntity.ok(courseService.findAllCouses(pageable, spec));
     }
 
     @GetMapping("/{courseId}")

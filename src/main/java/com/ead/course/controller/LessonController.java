@@ -82,6 +82,7 @@ public class LessonController {
         return ResponseEntity.ok(lessonService.findAllByModule(moduleId));
     }
 
+
     @GetMapping("/modules/{moduleId}/lessons/{lessonId}")
     public ResponseEntity<Object> getOneLesson(@PathVariable(value = "moduleId") UUID moduleId,
                                                @PathVariable(value = "lessonId") UUID lessonId){
