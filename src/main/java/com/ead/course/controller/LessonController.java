@@ -7,6 +7,9 @@ import com.ead.course.service.ModuleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -78,8 +81,9 @@ public class LessonController {
     }
 
     @GetMapping("/modules/{moduleId}/lessons")
-    public ResponseEntity<List<LessonModel>> getAllLessons(@PathVariable(value = "moduleId") UUID moduleId){
-        return ResponseEntity.ok(lessonService.findAllByModule(moduleId));
+    public ResponseEntity<List<LessonModel>> getAllLessons(@PathVariable(value = "moduleId") UUID moduleId,
+                                                           @PageableDefault(page = 0, size = 10, sort = "lesson_id", direction = Sort.Direction.ASC) Pageable pageable){
+        return ResponseEntity.ok(lessonService.findAllByModule(moduleId, pageable));
     }
 
 

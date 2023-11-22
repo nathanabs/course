@@ -6,6 +6,7 @@ import com.ead.course.repository.ModuleRepository;
 import com.ead.course.service.ModuleService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,8 +42,8 @@ public class ModuleServiceImpl implements ModuleService {
     }
 
     @Override
-    public List<ModuleModel> findAllModulesByCourse(UUID courseId) {
-        return moduleRepository.findAllModulesIntoCourse(courseId);
+    public List<ModuleModel> findAllModulesByCourse(UUID courseId, Pageable pageable) {
+        return moduleRepository.findAllModulesIntoCourse(courseId, pageable);
     }
 
     @Override

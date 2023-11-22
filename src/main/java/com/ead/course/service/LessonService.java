@@ -1,6 +1,7 @@
 package com.ead.course.service;
 
 import com.ead.course.model.LessonModel;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,5 +14,5 @@ public interface LessonService {
 
     void delete(LessonModel lessonModel);
 
-    List<LessonModel> findAllByModule(UUID moduleId);
+    List<LessonModel> findAllByModule(UUID moduleId, Pageable pageable);
 }
